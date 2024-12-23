@@ -32,10 +32,8 @@ Curve Loop(2) = {2, 3, 4, 7};
 Plane Surface(2) = {2};
 
 // Define Transfinite Lines
-Transfinite Curve {1} = Nx*(t/w) + 1 Using Progression 1;
-Transfinite Curve {2} = Nx - Nx*(t/w) + 1 Using Progression 1;
-Transfinite Curve {5} = Nx*(t/w) + 1 Using Progression 1;
-Transfinite Curve {4} = Nx - Nx*(t/w) + 1 Using Progression 1;
+Transfinite Curve {1, 5} = Nx*(t/w) + 1 Using Progression 1;
+Transfinite Curve {2, 4} = Nx - Nx*(t/w) + 1 Using Progression 1;
 Transfinite Curve {3, 6, 7} = Ny + 1 Using Progression 1;
 
 // Define transfinite surfaces
