@@ -1,5 +1,3 @@
-// Structured mesh for Mach 800 astrophysical jet simulation
-
 // Domain parameters
 w = 1.5;     // width of domain
 h = 0.5;     // height of domain
@@ -8,7 +6,7 @@ h_inlet = 0.05;  // height of inlet region
 // Mesh resolution parameters (coarse mesh)
 nx = 2400;    // elements in x direction
 ny = 800;    // elements in y direction
-ny_inlet = Round(ny * h_inlet/h);  // elements in inlet region proportional to height
+ny_inlet = Round(ny * (h_inlet/h)); // elements in inlet region proportional to height
 
 // Create points
 Point(1) = {0, 0, 0};           // bottom left
