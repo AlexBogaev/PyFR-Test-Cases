@@ -6,6 +6,7 @@ t = 1/6;    // trip location
 // Mesh parameters
 Nx = 960;  // Number of elements in x-direction (change this value as needed)
 Ny = 240;   // Number of elements in y-direction (change this value as needed)
+Nx_slip = Round(Nx * (t/w)); // Number of elements in slip region
 lc = 1.0 / Ny; // Characteristic length for mesh size
 
 // Create points
@@ -32,8 +33,8 @@ Curve Loop(2) = {2, 3, 4, 7};
 Plane Surface(2) = {2};
 
 // Define Transfinite Lines
-Transfinite Curve {1, 5} = Nx*(t/w) + 1 Using Progression 1;
-Transfinite Curve {2, 4} = Nx - Nx*(t/w) + 1 Using Progression 1;
+Transfinite Curve {1, 5} = Nx_slip + 1 Using Progression 1;
+Transfinite Curve {2, 4} = Nx - Nx_slip + 1 Using Progression 1;
 Transfinite Curve {3, 6, 7} = Ny + 1 Using Progression 1;
 
 // Define transfinite surfaces
