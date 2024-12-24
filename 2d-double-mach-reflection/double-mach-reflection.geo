@@ -1,21 +1,20 @@
 // Domain parameters
 w = 4.0;    // width of domain
 h = 1.0;    // height of domain
-t = 1/6;    // trip location
+t = 1/6;    // width of slip region
 
 // Mesh parameters
-Nx = 960;  // Number of elements in x-direction (change this value as needed)
+Nx = 960;   // Number of elements in x-direction (change this value as needed)
 Ny = 240;   // Number of elements in y-direction (change this value as needed)
 Nx_slip = Round(Nx * (t/w)); // Number of elements in slip region
-lc = 1.0 / Ny; // Characteristic length for mesh size
 
 // Create points
-Point(1) = {0, 0, 0, lc};
-Point(2) = {t, 0, 0, lc};
-Point(3) = {w, 0, 0, lc};
-Point(4) = {w, h, 0, lc};
-Point(5) = {t, h, 0, lc};
-Point(6) = {0, h, 0, lc};
+Point(1) = {0, 0, 0};
+Point(2) = {t, 0, 0};
+Point(3) = {w, 0, 0};
+Point(4) = {w, h, 0};
+Point(5) = {t, h, 0};
+Point(6) = {0, h, 0};
 
 // Create lines
 Line(1) = {1, 2};
@@ -46,8 +45,8 @@ Recombine Surface {1, 2};
 
 // Assign physical names
 Physical Surface("fluid") = {1, 2};
-Physical Curve("wall") = {1};
-Physical Curve("bottom") = {2};
+Physical Curve("bottom") = {1};
+Physical Curve("wall") = {2};
 Physical Curve("right") = {3};
 Physical Curve("top") = {4, 5};
 Physical Curve("left") = {6};
