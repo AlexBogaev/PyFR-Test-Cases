@@ -54,8 +54,6 @@ Physical Curve("Outlet") = {2, 6, 7};
 Physical Curve("Symmetry") = {1};
 
 // Mesh parameters
-Mesh.RecombineAll = 1;
-Mesh.Algorithm = 8; // Delaunay for quads
 Mesh.ElementOrder = 1;
 Mesh.SecondOrderLinear = 0;
 Mesh.SubdivisionAlgorithm = 0;
