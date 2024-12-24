@@ -44,11 +44,11 @@ Transfinite Surface {2};
 Recombine Surface {1, 2};
 
 // Define physical groups
-Physical Surface("Fluid") = {1, 2};
-Physical Curve("Inlet") = {4};
-Physical Curve("Slip") = {8};
-Physical Curve("Outlet") = {2, 6, 7};
-Physical Curve("Symmetry") = {1};
+Physical Surface("fluid") = {1, 2};
+Physical Curve("inlet") = {4};
+Physical Curve("free") = {8};
+Physical Curve("outlet") = {2, 6, 7};
+Physical Curve("symmetry") = {1};
 
 // Mesh parameters
 Mesh.ElementOrder = 1;
