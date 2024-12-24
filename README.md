@@ -4,12 +4,10 @@
 
 Provided test cases include:
 
-- 2D Couette flow (`2d-couette-flow/`)
-- 2D Euler vortex (`2d-euler-vortex/`)
-- 3D Triangular aerofoil (`3d-triangular-aerofoil/`)
-- 3D Taylor-Green (`3d-taylor-green/`)
-- 2D incompressible cylinder flow (`2d-inc-cylinder/`)
 - 2D Double Mach Reflection (`2d-double-mach-reflection/`)
+- 2D Kelvin Helmholtz Euler (`2d-kelvin-helmholtz-euler/`)
+- 2D Mach 800 Astrophysical Jet (`2d-mach800-astro-jet/`)
+- 2D Re 22000 Square Cylinder (`2d-re22000-square-cylinder/`)
 - 2D Viscous Shock Tube (`2d-viscous-shock-tube/`)
 
 Instructions on how to run the test cases can be found in the 
