@@ -21,7 +21,6 @@ Line(1) = {1, 2};  // bottom
 Line(2) = {2, 6};  // right lower
 Line(3) = {6, 5};  // middle
 Line(4) = {5, 1};  // left lower (inlet)
-// Line(5) = {5, 6};  // middle
 Line(6) = {6, 3};  // right upper
 Line(7) = {3, 4};  // top
 Line(8) = {4, 5};  // left upper
