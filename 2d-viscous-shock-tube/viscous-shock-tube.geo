@@ -22,11 +22,6 @@ Line(4) = {4, 1};
 Curve Loop(1) = {1, 2, 3, 4};
 Plane Surface(1) = {1};
 
-// Assign physical names
-Physical Surface("fluid") = {1};
-Physical Curve("wall") = {1, 2, 3};
-Physical Curve("sym") = {4};
-
 // Create structured grid
 Transfinite Curve {1, 3} = Ny + 1 Using Progression 1;
 Transfinite Curve {2, 4} = Nx + 1 Using Progression 1;
@@ -34,6 +29,11 @@ Transfinite Surface {1} = {1, 2, 3, 4};
 
 // Recombine triangular elements into quads
 Recombine Surface {1};
+
+// Assign physical names
+Physical Surface("fluid") = {1};
+Physical Curve("wall") = {1, 2, 3};
+Physical Curve("sym") = {4};
 
 // Specify element types to generate
 Mesh.ElementOrder = 1;
