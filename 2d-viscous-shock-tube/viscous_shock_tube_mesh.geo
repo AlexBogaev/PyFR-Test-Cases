@@ -1,22 +1,24 @@
+// Domain parameters
+w = 1.0;    // width of domain
+h = 1.0;    // height of domain
+
 // Mesh parameters
-N = 1024;    // Number of elements in each direction (change this value as needed)
-lc = 1.0 / N;  // Characteristic length for mesh size
+Nx = 1024;  // Number of elements in x-direction (change this value as needed)
+Ny = 512;   // Number of elements in y-direction (change this value as needed)
 
-// Save parameters
-Mesh.SaveAll = 0; // Don't save all elements
-Mesh.SaveElementTagType = 2; // Save only physical elements
+// Create points
+Point(1) = {-w/2, 0, 0};
+Point(2) = {-w/2, -h/2, 0};
+Point(3) = {w/2, -h/2, 0};
+Point(4) = {w/2, 0, 0};
 
-// Create geometry
-Point(1) = {-0.5, 0, 0, lc};
-Point(2) = {-0.5, -0.5, 0, lc};
-Point(3) = {0.5, -0.5, 0, lc};
-Point(4) = {0.5, 0, 0, lc};
-
+// Create lines
 Line(1) = {1, 2};
 Line(2) = {2, 3};
 Line(3) = {3, 4};
 Line(4) = {4, 1};
 
+// Create surfaces
 Curve Loop(1) = {1, 2, 3, 4};
 Plane Surface(1) = {1};
 
@@ -26,8 +28,8 @@ Physical Curve("wall") = {1, 2, 3};
 Physical Curve("sym") = {4};
 
 // Create structured grid
-Transfinite Curve {1, 3} = N / 2 + 1 Using Progression 1;
-Transfinite Curve {2, 4} = N + 1 Using Progression 1;
+Transfinite Curve {1, 3} = Ny + 1 Using Progression 1;
+Transfinite Curve {2, 4} = Nx + 1 Using Progression 1;
 Transfinite Surface {1} = {1, 2, 3, 4};
 
 // Recombine triangular elements into quads
@@ -38,3 +40,6 @@ Mesh.ElementOrder = 1;
 Mesh.SecondOrderLinear = 0;
 Mesh.SubdivisionAlgorithm = 0;
 
+// Save parameters
+Mesh.SaveAll = 0; // Don't save all elements
+Mesh.SaveElementTagType = 2; // Save only physical elements
