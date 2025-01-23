@@ -1,45 +1,77 @@
-// Domain parameters
-w = 1.0;    // width of domain
-h = 0.5;    // height of domain
+//=============================================================================
+// Viscous Shock Tube - Structured Mesh Definition
+// 
+// Description:
+// This file defines a structured mesh for simulating a viscous shock tube
+// problem. The domain is symmetric about the top boundary with no-slip walls
+// on the remaining boundaries.
+//=============================================================================
 
-// Mesh parameters
-Nx = 1024;  // Number of elements in x-direction (change this value as needed)
-Ny = 512;   // Number of elements in y-direction (change this value as needed)
+//-----------------------------------------------------------------------------
+// Domain Parameters (assumed normalized units)
+//-----------------------------------------------------------------------------
+w = 1.0;         // Width of domain
+h = 0.5;         // Height of domain
 
-// Create points
-Point(1) = {-w/2, 0, 0};
-Point(2) = {-w/2, -h, 0};
-Point(3) = {w/2, -h, 0};
-Point(4) = {w/2, 0, 0};
+//-----------------------------------------------------------------------------
+// Mesh Resolution Parameters
+//-----------------------------------------------------------------------------
+Nx = 400;        // Elements in x direction
+Ny = 200;        // Elements in y direction
 
-// Create lines
-Line(1) = {1, 2};
-Line(2) = {2, 3};
-Line(3) = {3, 4};
-Line(4) = {4, 1};
+//-----------------------------------------------------------------------------
+// Point Definitions
+//-----------------------------------------------------------------------------
+Point(1) = {-w/2, 0, 0};       // Top left
+Point(2) = {-w/2, -h, 0};      // Bottom left
+Point(3) = {w/2, -h, 0};       // Bottom right
+Point(4) = {w/2, 0, 0};        // Top right
 
-// Create surfaces
+//-----------------------------------------------------------------------------
+// Line Definitions
+//-----------------------------------------------------------------------------
+Line(1) = {1, 2};  // Left wall
+Line(2) = {2, 3};  // Bottom wall
+Line(3) = {3, 4};  // Right wall
+Line(4) = {4, 1};  // Top symmetry line
+
+//-----------------------------------------------------------------------------
+// Surface Definitions
+//-----------------------------------------------------------------------------
 Curve Loop(1) = {1, 2, 3, 4};
 Plane Surface(1) = {1};
 
-// Create structured grid
-Transfinite Curve {1, 3} = Ny + 1 Using Progression 1;
-Transfinite Curve {2, 4} = Nx + 1 Using Progression 1;
+//-----------------------------------------------------------------------------
+// Mesh Control - Transfinite Lines
+//-----------------------------------------------------------------------------
+Transfinite Curve {1, 3} = Ny + 1 Using Progression 1.0;  // Vertical
+Transfinite Curve {2, 4} = Nx + 1 Using Progression 1.0;  // Horizontal
+
+//-----------------------------------------------------------------------------
+// Mesh Generation Controls
+//-----------------------------------------------------------------------------
+// Define transfinite surface
 Transfinite Surface {1} = {1, 2, 3, 4};
 
-// Recombine triangular elements into quads
+// Recombine triangles into quadrilateral elements
 Recombine Surface {1};
 
-// Assign physical names
+//-----------------------------------------------------------------------------
+// Physical Groups for Boundary Condition Assignment
+//-----------------------------------------------------------------------------
 Physical Surface("fluid") = {1};
 Physical Curve("wall") = {1, 2, 3};
 Physical Curve("sym") = {4};
 
-// Specify element types to generate
-Mesh.ElementOrder = 1;
-Mesh.SecondOrderLinear = 0;
-Mesh.SubdivisionAlgorithm = 0;
+//-----------------------------------------------------------------------------
+// Mesh Generation Parameters
+//-----------------------------------------------------------------------------
+Mesh.ElementOrder = 1;          // Linear elements
+Mesh.SecondOrderLinear = 0;     // Disable second order
+Mesh.SubdivisionAlgorithm = 0;  // No subdivision
 
-// Save parameters
-Mesh.SaveAll = 0; // Don't save all elements
-Mesh.SaveElementTagType = 2; // Save only physical elements
+//-----------------------------------------------------------------------------
+// Output Control
+//-----------------------------------------------------------------------------
+Mesh.SaveAll = 0;               // Save only specified elements
+Mesh.SaveElementTagType = 2;    // Save only physical elements
